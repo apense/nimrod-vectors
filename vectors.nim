@@ -19,6 +19,13 @@ proc initZeroVector*(dim : int): Vector =
   for i in 1..dim:
     result.deltas.add(0.0)
 
+proc init2dVector(coords : seq[float]): Vector =
+  result = initVector(2,coords)
+
+proc init3dVector(coords : seq[float]): Vector =
+  result = initVector(3,coords)
+
+
 proc `+`*(A,B : Vector) : Vector =
   system.doAssert(A.dim == B.dim)
   result = initZeroVector(A.dim)
@@ -31,20 +38,30 @@ proc `*`*(A: Vector, s : float): Vector =
     result.deltas[i] = A.deltas[i]*s
 
 proc `-`*(A,B : Vector) : Vector =
+  system.doAssert(A.dim == B.dim)
   result = A + (B * -1.0)
 
 proc `*`*(A,B : Vector) : float =
   #dot product
+  system.doAssert(A.dim == B.dim)
   for i in 0..(A.deltas.len-1):
     result = result + A.deltas[i] * B.deltas[i]
 
-proc `norm`*(A : Vector) : float =
+proc norm*(A : Vector) : float =
   for i in 0..(A.deltas.len-1):
     result = result + (A.deltas[i] * A.deltas[i])
   result = pow(result, 0.5)
 
+proc unit*(A : Vector) : Vector =
+  result = A * norm(A)
 
-var A : Vector = initVector(3,@[0.5,2.0,1.0])
-var B : Vector = initVector(3,@[5.0,3.0,0.0])
-echo( norm (A+B) )
+proc angle(A,B : Vector) : float =
+  result = arccos((A*B)/(norm(A)*norm(B)))
+  #returns inter-Vector angle in radians
+
+#todo
+#cross product for 3d
+# optional : genralized cross product
+# unit-vector from angles
+
 
