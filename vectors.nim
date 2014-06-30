@@ -4,20 +4,20 @@ import math
 type
   Vector* = object
     deltas:seq[float]
-    dim:int
+    len*:int
 
 
-proc initVector*(dim : int, coords : seq[float]): Vector =
-  system.doAssert(dim==coords.len)
-  system.doAssert(dim>=2)
-  result.dim = dim
+proc initVector*(len : int, coords : seq[float]): Vector =
+  system.doAssert(len==coords.len)
+  system.doAssert(len>=2)
+  result.len = len
   result.deltas = coords
 
 
-proc initZeroVector*(dim : int): Vector =
+proc initZeroVector*(len : int): Vector =
   result.deltas = @[]
-  result.dim = dim
-  for i in 1..dim:
+  result.len = len
+  for i in 1..len:
     result.deltas.add(0.0)
 
 proc init2dVector(coords : seq[float]): Vector =
@@ -35,23 +35,23 @@ iterator items*(A:Vector): float=
     yield i
 
 proc `+`*(A,B : Vector) : Vector =
-  system.doAssert(A.dim == B.dim)
-  result = initZeroVector(A.dim)
+  system.doAssert(A.len == B.len)
+  result = initZeroVector(A.len)
   for i in 0..(A.deltas.len-1):
     result.deltas[i] = A.deltas[i] + B.deltas[i]
 
 proc `*`*(A: Vector, s : float): Vector = 
-  result = initZeroVector(A.dim)
+  result = initZeroVector(A.len)
   for i in 0..(A.deltas.len-1):
     result.deltas[i] = A.deltas[i]*s
 
 proc `-`*(A,B : Vector) : Vector =
-  system.doAssert(A.dim == B.dim)
+  system.doAssert(A.len == B.len)
   result = A + (B * -1.0)
 
 proc `*`*(A,B : Vector) : float =
   #dot product
-  system.doAssert(A.dim == B.dim)
+  system.doAssert(A.len == B.len)
   for i in 0..(A.deltas.len-1):
     result = result + A.deltas[i] * B.deltas[i]
 
@@ -68,7 +68,7 @@ proc angle*(A,B : Vector) : float =
   #returns inter-Vector angle in radians
 
 proc cross*(A,B : Vector) : Vector = 
-  system.doAssert(A.dim == 3 AND B.dim == 3)
+  system.doAssert(A.len == 3 AND B.len == 3)
   result = initZeroVector(3)
   result.deltas[0] = A.deltas[1]*B.deltas[2] - A.deltas[2]*B.deltas[1]
   result.deltas[1] = A.deltas[2]*B.deltas[0] - A.deltas[0]*B.deltas[2]
@@ -77,6 +77,3 @@ proc cross*(A,B : Vector) : Vector =
 proc `$`*(A,Vector):string =
   result = $A.digits
 
-var test: Vector = initZeroVector(10)
-for i in test:
-  echo(i)
