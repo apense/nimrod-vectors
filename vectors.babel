@@ -1,0 +1,9 @@
+[Package]
+name          = "vectors"
+version       = "0.1.0"
+author        = "Brendan Benshoof"
+description   = "Simple multidimensional vector math"
+license       = "MIT"
+
+[Deps]
+Requires: "nimrod >= 0.9.4"
