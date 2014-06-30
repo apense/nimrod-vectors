@@ -20,10 +20,10 @@ proc initZeroVector*(len : int): Vector =
   for i in 1..len:
     result.deltas.add(0.0)
 
-proc init2dVector(coords : seq[float]): Vector =
+proc init2dVector*(coords : seq[float]): Vector =
   result = initVector(2,coords)
 
-proc init3dVector(coords : seq[float]): Vector =
+proc init3dVector*(coords : seq[float]): Vector =
   result = initVector(3,coords)
 
 
