@@ -20,9 +20,10 @@ Alternatively, constructors for zero vectors and 2d and 3d vectors are provided
         var myVec2d : Vector = init2dVector(@[1.0,2.0])
         #does not need dimemsion to be provided
 
-        var myVec32 : Vector = init3dVector(@[1.0,2.0,3.0])
+        var myVec3d : Vector = init3dVector(@[1.0,2.0,3.0])
 
 The attributes of a Vector can be read and written using `[]` and iterated over naturally
+
         var A : Vector = initZeroVector(2)
         A[0] = 5.0
 
