@@ -30,6 +30,13 @@ proc init3dVector*(coords : seq[float]): Vector =
 proc `[]`*(A:Vector, i:int):float=
   result = A.deltas[i]
 
+proc `[]`*(A:Vector, i:int, val:float)=
+  A.deltas[i] = val
+
+
+proc `[]=`*[R] (vec:var Vector[R]; idx:R; val:float) = 
+  vec.deltas[idx] = val
+
 iterator items*(A:Vector): float=
   for i in A.deltas:
     yield i
