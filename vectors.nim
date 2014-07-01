@@ -68,7 +68,7 @@ proc norm*(A : Vector) : float =
   result = pow(result, 0.5)
 
 proc unit*(A : Vector) : Vector =
-  result = A * norm(A)
+  result = A * (1.0/norm(A))
 
 proc angle*(A,B : Vector) : float =
   result = arccos((A*B)/(norm(A)*norm(B)))
