@@ -30,12 +30,9 @@ proc init3dVector*(coords : seq[float]): Vector =
 proc `[]`*(A:Vector, i:int):float=
   result = A.deltas[i]
 
-proc `[]`*(A:Vector, i:int, val:float)=
-  A.deltas[i] = val
+proc `[]=`*(vec:var Vector, i:int, val:float)=
+  vec.deltas[i] = val
 
-
-proc `[]=`*[R] (vec:var Vector[R]; idx:R; val:float) = 
-  vec.deltas[idx] = val
 
 iterator items*(A:Vector): float=
   for i in A.deltas:
@@ -68,7 +65,7 @@ proc norm*(A : Vector) : float =
   result = pow(result, 0.5)
 
 proc unit*(A : Vector) : Vector =
-  result = A * (1.0/norm(A))
+  result = A * (1.0 / norm(A))
 
 proc angle*(A,B : Vector) : float =
   result = arccos((A*B)/(norm(A)*norm(B)))
