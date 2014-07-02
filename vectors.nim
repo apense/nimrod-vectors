@@ -78,6 +78,4 @@ proc cross*(A,B : Vector) : Vector =
   result.deltas[1] = A.deltas[2]*B.deltas[0] - A.deltas[0]*B.deltas[2]
   result.deltas[2] = A.deltas[0]*B.deltas[1] - A.deltas[1]*B.deltas[0]
 
-proc `$`*(A,Vector):string =
-  result = $A.digits
 
