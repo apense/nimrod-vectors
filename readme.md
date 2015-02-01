@@ -7,10 +7,13 @@ Vectors can be declared with any number of dimensions : dim >= 2
 
 Vectors are initialized using a number of dimensions and seq[float] describing it's value:
 
+```nimrod
         var myVec : Vector = Vector(2,@[1.0,2.0])
+```
 
 Alternatively, constructors for zero vectors and 2d and 3d vectors are provided
 
+```nimrod
         var myVec : Vector = initVector(2,@[1.0,2.0])
         #Object initialization with sanity checking
 
@@ -21,17 +24,21 @@ Alternatively, constructors for zero vectors and 2d and 3d vectors are provided
         #does not need dimemsion to be provided
 
         var myVec3d : Vector = init3dVector(@[1.0,2.0,3.0])
+```
 
 The attributes of a Vector can be read and written using `[]` and iterated over naturally
 
+```nimrod
         var A : Vector = initZeroVector(2)
         A[0] = 5.0
 
         for i in A:
                 echo(i)
+```
 
 All basic operations are defined for vector:
 
+```nimrod
         var A,B,C : Vector
         C = A+B #Vector addition
 
@@ -48,3 +55,4 @@ All basic operations are defined for vector:
         var theta : float = angle(A,B) #inter-vector angle in radians
 
         C = cross(A,B) #Cross Product, for 3D ONLY
+```
